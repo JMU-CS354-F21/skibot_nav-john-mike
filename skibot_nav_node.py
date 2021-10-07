@@ -37,13 +37,32 @@ class GuidanceNode(rclpy.node.Node):
         i_max = 5.0
         i_min = 0.0
 
-        self.pid = pid.PID(p_gain, i_gain, d_gain, i_min, i_max)
+        self.pid_x = pid.PID(p_gain, i_gain, d_gain, i_min, i_max)
+        self.pid_z = pid.PID(p_gain, i_gain, d_gain, i_min, i_max)
+       # self.pid = pid.PID(p_gain, i_gain, d_gain, i_min, i_max)
 
         log_str = "P gain: {}, I gain: {}, D gain: {}"
         self.get_logger().info(log_str.format(p_gain, i_gain, d_gain))
 
     def location_callback(self, location):
 #        thrust = Vector3()
+         # need to initialize the wrench msg  
+
+         # need to create triangle and determine if 
+          x_triangle = self.target.x - location.x
+          y_triangle = self.target.y - location.y
+# check if the arctan is the right function
+          desired_angle = arctan(x_triangle / y_triangle)
+          
+          if (desired_angle == self.pos.theta):
+            
+          elif (desired_angle > self.pos.theta):
+				
+					
+
+          elif (desired_angle < self.pos.theta):
+
+
 
  #       if location.y < self.target.y:
   #          thrust.y = self.pid.update_PID(self.target.y - location.y)
