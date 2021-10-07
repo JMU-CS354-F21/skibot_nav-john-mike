@@ -1,0 +1,32 @@
+running egg_info
+creating ../build/skibot_nav/skibot_nav.egg-info
+writing ../build/skibot_nav/skibot_nav.egg-info/PKG-INFO
+writing dependency_links to ../build/skibot_nav/skibot_nav.egg-info/dependency_links.txt
+writing entry points to ../build/skibot_nav/skibot_nav.egg-info/entry_points.txt
+writing requirements to ../build/skibot_nav/skibot_nav.egg-info/requires.txt
+writing top-level names to ../build/skibot_nav/skibot_nav.egg-info/top_level.txt
+writing manifest file '../build/skibot_nav/skibot_nav.egg-info/SOURCES.txt'
+reading manifest file '../build/skibot_nav/skibot_nav.egg-info/SOURCES.txt'
+writing manifest file '../build/skibot_nav/skibot_nav.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/curleyjw/dev_ws/src/skibot/skibot_nav-john-mike/build/skibot_nav/build
+creating /home/curleyjw/dev_ws/src/skibot/skibot_nav-john-mike/build/skibot_nav/build/lib
+creating /home/curleyjw/dev_ws/src/skibot/skibot_nav-john-mike/build/skibot_nav/build/lib/skibot_nav
+copying skibot_nav/__init__.py -> /home/curleyjw/dev_ws/src/skibot/skibot_nav-john-mike/build/skibot_nav/build/lib/skibot_nav
+running install
+running install_lib
+creating /home/curleyjw/dev_ws/src/skibot/skibot_nav-john-mike/install/skibot_nav/lib/python3.8/site-packages/skibot_nav
+copying /home/curleyjw/dev_ws/src/skibot/skibot_nav-john-mike/build/skibot_nav/build/lib/skibot_nav/__init__.py -> /home/curleyjw/dev_ws/src/skibot/skibot_nav-john-mike/install/skibot_nav/lib/python3.8/site-packages/skibot_nav
+byte-compiling /home/curleyjw/dev_ws/src/skibot/skibot_nav-john-mike/install/skibot_nav/lib/python3.8/site-packages/skibot_nav/__init__.py to __init__.cpython-38.pyc
+running install_data
+creating /home/curleyjw/dev_ws/src/skibot/skibot_nav-john-mike/install/skibot_nav/share/ament_index
+creating /home/curleyjw/dev_ws/src/skibot/skibot_nav-john-mike/install/skibot_nav/share/ament_index/resource_index
+creating /home/curleyjw/dev_ws/src/skibot/skibot_nav-john-mike/install/skibot_nav/share/ament_index/resource_index/packages
+copying resource/skibot_nav -> /home/curleyjw/dev_ws/src/skibot/skibot_nav-john-mike/install/skibot_nav/share/ament_index/resource_index/packages
+copying package.xml -> /home/curleyjw/dev_ws/src/skibot/skibot_nav-john-mike/install/skibot_nav/share/skibot_nav
+running install_egg_info
+Copying ../build/skibot_nav/skibot_nav.egg-info to /home/curleyjw/dev_ws/src/skibot/skibot_nav-john-mike/install/skibot_nav/lib/python3.8/site-packages/skibot_nav-0.0.0-py3.8.egg-info
+running install_scripts
+Installing service script to /home/curleyjw/dev_ws/src/skibot/skibot_nav-john-mike/install/skibot_nav/lib/skibot_nav
+writing list of installed files to '/home/curleyjw/dev_ws/src/skibot/skibot_nav-john-mike/build/skibot_nav/install.log'

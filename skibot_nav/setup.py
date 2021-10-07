@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-        'service = skibot_nav.service_member_function:skibot_nav_node',
+            'skibot_node = skibot.skibot_node:main'
         ],
     },
 )
