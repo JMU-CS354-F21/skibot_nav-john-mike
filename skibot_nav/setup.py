@@ -1,4 +1,6 @@
 from setuptools import setup
+from glob import glob
+import os.path
 
 package_name = 'skibot_nav'
 
@@ -20,7 +22,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'skibot_nav_node = skibot_nav.skibot_node:main'
+            'skibot_nav_node = skibot_nav.skibot_nav_node:main'
         ],
     },
 )
