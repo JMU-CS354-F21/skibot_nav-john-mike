@@ -20,8 +20,9 @@ from skibot_interfaces.msg import Pose
 
 class GuidanceNode(rclpy.node.Node):
     def __init__(self):
-        super().__init__('guidance_node')
+        super().__init__('skibot_nav_node')
 
+        print("I init")
         #self.create_subscription(Point, 'location', self.location_callback, 10)
         self.create_subscription(Pose, 'pose', self.location_callback, 10)
         self.create_subscription(Point, 'target_event', self.target_callback,
@@ -58,34 +59,41 @@ class GuidanceNode(rclpy.node.Node):
 
     def location_callback(self, pose):
 #        thrust = Vector3()
+          print("location callback")
+        #  print(self.get_logger().info())
          # need to initialize the wrench msg  
-          wrench = Wrench()
+          thrust = Wrench()
+         # thrust.force.x = 1.0
+         # thrust.torque.z = 0.1
+
+          print(thrust.force.x)
+          print(thrust.torque.z)
          # need to create triangle and determine if 
           x_triangle = self.target.x - pose.x
           y_triangle = self.target.y - pose.y
 # check if the arctan is the right function
           desired_angle = np.arctan2(y_triangle, x_triangle)
-          
           if (desired_angle == pose.theta):
-            wrench.torque.z = 0
+            thrust.torque.z = 0
  
-            pass
           elif (desired_angle > pose.theta):
-            wrench.torque.z = self.pid_z.update_PID(desired_angle - pose.theta)
+            thrust.torque.z = self.pid_z.update_PID(desired_angle - pose.theta)
 
-            pass
           
 # need different behavior based on which way to turn
-          elif (desired_angle < self.pos.theta):
-            wrench.torque.z = self.pid_z.update_PID(desired_angle - self.pos.theta)
+          elif (desired_angle < pose.theta):
+            thrust.torque.z = self.pid_z.update_PID(desired_angle - pose.theta)
 
-            pass
-            distance =np.sqrt (np.square(x_triangle) + np.square(y_triangle))
-            if distance > 0.2:
-              wrench.force.x = self.pid_x.update_PID(distance)
-            else:
-              wrench.force.x = 0
-            self.wrench_pub.publish(wrench) 
+          distance =np.sqrt (np.square(x_triangle) + np.square(y_triangle))
+          if distance > 0.1:
+            thrust.force.x = self.pid_x.update_PID(distance)
+          else:
+            thrust.force.x = 0.0
+         # thrust.force.x = 1.0
+          print(thrust.force.x)
+          print(thrust.torque.z)
+          print(thrust)
+          self.wrench_pub.publish(thrust) 
           
 
  #       if location.y < self.target.y:
