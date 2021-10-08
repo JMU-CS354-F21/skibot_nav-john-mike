@@ -1,10 +1,8 @@
 #!/usr/bin/env python
-
+  
 """Python rocket control node using PID controller.
-
-Author: Nathan Sprague, John Curley, & Mike Leek
+Author: Nathan Sprague & John Curley & Michael Leek
 Version:
-
 """
 import rclpy
 import rclpy.node
@@ -13,43 +11,21 @@ import numpy as np
 from geometry_msgs.msg import Point
 from geometry_msgs.msg import Vector3
 from geometry_msgs.msg import Wrench
-<<<<<<< HEAD
-
-=======
->>>>>>> a978185bc1863d8171d01f77f0984541ff07109c
 from jmu_ros2_util import pid
 from skibot_interfaces.msg import Pose
 
 
 
-class NavigationNode(rclpy.node.Node):
+class GuidanceNode(rclpy.node.Node):
     def __init__(self):
-        super().__init__('skibot_nav_node')
-
+        super().__init__('guidance_node')
+        print("A")
         #self.create_subscription(Point, 'location', self.location_callback, 10)
         self.create_subscription(Pose, 'pose', self.location_callback, 10)
         self.create_subscription(Point, 'target_event', self.target_callback,
                                  10)
 
-<<<<<<< HEAD
-        self.thrust_pub = self.create_publisher(Wrench, 'thrust', 10)
-
-        # Set an arbitrary initial target
-        self.target = Point()
-        self.target.x = 50.0
-        self.target.y = 0.0
-        self.target.z = 0.0
-
-        # THESE SHOULD BE READ FROM PARAMETERS!
-        p_gain = 0.3
-        i_gain = 0.2
-        d_gain = 0.2
-        i_max = 5.0
-        i_min = 0.0
-
-        self.pid = pid.PID(p_gain, i_gain, d_gain, i_min, i_max)
-=======
-        self.wrench_pub = self.create_publisher(Wrench, 'thrust', 10)
+        self.wrench_pub = self.create_publisher(Wrench, '/thrust', 10)
 
         # Set an arbitrary initial target
         self.target = Point()
@@ -74,23 +50,18 @@ class NavigationNode(rclpy.node.Node):
         self.pid_x = pid.PID(p_gain_x, i_gain_x, d_gain_x, i_min_x, i_max_x)
         self.pid_z = pid.PID(p_gain_z, i_gain_z, d_gain_z, i_min_z, i_max_z)
        # self.pid = pid.PID(p_gain, i_gain, d_gain, i_min, i_max)
->>>>>>> a978185bc1863d8171d01f77f0984541ff07109c
 
         #log_str = "P gain: {}, I gain: {}, D gain: {}"
        # self.get_logger().info(log_str.format(p_gain, i_gain, d_gain))
 
-<<<<<<< HEAD
-    def location_callback(self, location):
-        thrust = Wrench()
-        
-
-        thrust.force.x = self.pid.update_PID(self.target.y - location.y)
-=======
     def location_callback(self, pose):
-#        thrust = Vector3()
+#      thrust = Vector3()
+          print("B")
          # need to initialize the wrench msg  
           wrench = Wrench()
          # need to create triangle and determine if 
+          print(str(self.target.x))
+          print(str(pose.x))
           x_triangle = self.target.x - pose.x
           y_triangle = self.target.y - pose.y
 # check if the arctan is the right function
@@ -117,28 +88,23 @@ class NavigationNode(rclpy.node.Node):
               wrench.force.x = 0
             self.wrench_pub.publish(wrench) 
           
->>>>>>> a978185bc1863d8171d01f77f0984541ff07109c
 
+ #       if location.y < self.target.y:
+  #          thrust.y = self.pid.update_PID(self.target.y - location.y)
 
-        self.thrust_pub.publish(thrust)
+#        self.thrust_pub.publish(thrust)
 
     def target_callback(self, target_msg):
-<<<<<<< HEAD
-        self.pid.reset()
-        self.target = target_msg
-
-=======
         self.target = target_msg
         self.pid_x.reset()
         self.pid_z.reset()
->>>>>>> a978185bc1863d8171d01f77f0984541ff07109c
 
 def main():
     rclpy.init()
-    nav_node = NavigationNode()
-    rclpy.spin(nav_node)
+    thruster_node = GuidanceNode()
+    rclpy.spin(thruster_node)
 
-    nav_node.destroy_node()
+    thruster_node.destroy_node()
     rclpy.shutdown()
 
 
